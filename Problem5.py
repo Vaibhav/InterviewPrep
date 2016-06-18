@@ -1,28 +1,10 @@
 
-def is_palindrome(n):
-    return str(n) == str(n)[::-1]
-
-
-max_pal = 0
-
-for i in range(999, 99, -1):
-    for j in range(999, 99, -1):
-		pal = i * j;
-		if(is_palindrome(pal)) and pal > max_pal:
-			max_pal = pal
-
-
-print "Largest palindrome which is created by multiplying two 3-digit numbers: " + str(max_pal);
-
-#906609
-
-#====================================
 
 #What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
 #worked out prime facotrization
 num = 1*2*3*5*7*11*13*17*19*2*2*3*2
-print "LCM" + str(num);
+print "LCM: " + str(num);
 
 
 # used brute force to check for LCM(1, range(1,21))
