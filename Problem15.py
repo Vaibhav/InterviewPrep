@@ -1,25 +1,22 @@
+
 import time
 
-# terrible efficiency
-# pretty sure its O(n!)
-
-grids = [20,20]
- 
-def recPath(grid):
-    # base case, no moves left
-    if grid == [0,0]: return 1
-    # recursive calls
-    numofPaths = 0
-    # move left when possible
-    if grid[0] > 0:
-        numofPaths += recPath([grid[0]-1,grid[1]])
-    # move down when possible
-    if grid[1] > 0:
-        numofPaths += recPath([grid[0],grid[1]-1])
-    return numofPaths
- 
 start = time.time()
-result = recPath(grids)
-elapsed = time.time() - start
- 
-print "result %s found in %s seconds" % (result, elapsed)
+
+
+def factorial(num):
+    f = 1
+    for x in xrange(1, num + 1):
+        f = f * x
+    return f
+
+n = 40      # The total number of moves for any one path (right + down)
+r = 20      # The total number of right moves for any one path
+
+ans = (factorial(n) / factorial(r) / factorial(r))
+
+print "Answer: " + str(ans)
+end = time.time() - start
+print end
+
+# 0.00100016593933 seconds
