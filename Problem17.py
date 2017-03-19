@@ -31,16 +31,13 @@ def to_english(number):
         8: 'eighty',
         9: 'ninety'
     }
-    if abs(number) >= 10000:
+	
+    if number >= 10000:
         return str(number)
     elif number == 0:
         return 'zero'
     else:
         output = ''
-
-        if number < 0:
-            output += 'negative '
-            number = abs(number)
 
         if number >= 1000:
             output += ones[number // 1000]
