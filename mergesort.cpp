@@ -1,81 +1,74 @@
-/* Helper function for finding the max of two numbers */
-int max(int x, int y)
+/* C program for Merge Sort */
+#include<stdlib.h>
+#include<stdio.h>
+ 
+// Merges two subarrays of arr[].
+// First subarray is arr[l..m]
+// Second subarray is arr[m+1..r]
+void merge(int arr[], int l, int m, int r)
 {
-    if(x > y)
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+    /* create temp arrays */
+    int L[n1], R[n2];
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray
+    j = 0; // Initial index of second subarray
+    k = l; // Initial index of merged subarray
+    while (i < n1 && j < n2)
     {
-        return x;
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
     }
-    else
+ 
+    /* Copy the remaining elements of L[], if there
+       are any */
+    while (i < n1)
     {
-        return y;
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+ 
+    /* Copy the remaining elements of R[], if there
+       are any */
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
     }
 }
-
-/* left is the index of the leftmost element of the subarray; right is one
- * past the index of the rightmost element */
-void merge_helper(int *input, int left, int right, int *scratch)
+ 
+/* l is for left index and r is right index of the
+   sub-array of arr to be sorted */
+void mergeSort(int arr[], int l, int r)
 {
-    /* base case: one element */
-    if(right == left + 1)
+    if (l < r)
     {
-        return;
-    }
-    else
-    {
-        int i = 0;
-        int length = right - left;
-        int midpoint_distance = length/2;
-        /* l and r are to the positions in the left and right subarrays */
-        int l = left, r = left + midpoint_distance;
-
-        /* sort each subarray */
-        merge_helper(input, left, left + midpoint_distance, scratch);
-        merge_helper(input, left + midpoint_distance, right, scratch);
-
-        /* merge the arrays together using scratch for temporary storage */ 
-        for(i = 0; i < length; i++)
-        {
-            /* Check to see if any elements remain in the left array; if so,
-             * we check if there are any elements left in the right array; if
-             * so, we compare them.  Otherwise, we know that the merge must
-             * use take the element from the left array */
-            if(l < left + midpoint_distance && 
-                    (r == right || max(input[l], input[r]) == input[l]))
-            {
-                scratch[i] = input[l];
-                l++;
-            }
-            else
-            {
-                scratch[i] = input[r];
-                r++;
-            }
-        }
-        /* Copy the sorted subarray back to the input */
-        for(i = left; i < right; i++)
-        {
-            input[i] = scratch[i - left];
-        }
-    }
-}
-
-/* mergesort returns true on success.  Note that in C++, you could also
- * replace malloc with new and if memory allocation fails, an exception will
- * be thrown.  If we don't allocate a scratch array here, what happens? 
- *
- * Elements are sorted in reverse order -- greatest to least */
-
-int mergesort(int *input, int size)
-{
-    int *scratch = (int *)malloc(size * sizeof(int));
-    if(scratch != NULL)
-    {
-        merge_helper(input, 0, size, scratch);
-        free(scratch);
-        return 1;
-    }
-    else
-    {
-        return 0;
+        // Same as (l+r)/2, but avoids overflow for
+        // large l and h
+        int m = l+(r-l)/2;
+ 
+        // Sort first and second halves
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+ 
+        merge(arr, l, m, r);
     }
 }
