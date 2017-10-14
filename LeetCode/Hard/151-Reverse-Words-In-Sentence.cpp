@@ -6,7 +6,7 @@ public:
         int len1 = s.size();
         int l=0;
         
-        for(int i = 0; i < len; i++) {
+        for(int i = 0; i < len1; i++) {
             if(s[i] != ' ' || (i > 0 && s[i-1] != ' '))
                 s[l++] = s[i];
         }
