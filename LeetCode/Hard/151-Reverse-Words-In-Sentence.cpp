@@ -18,8 +18,8 @@ public:
         reverse(s.begin(), s.end());
         
         l = 0;
-        
-        for(int i = 0;i < s.size(); i++) {
+        int len2 = s.size();
+        for(int i = 0;i < len2; i++) {
             
             if(s[i] == ' ') {
                 reverse(s.begin()+l, s.begin()+i);
