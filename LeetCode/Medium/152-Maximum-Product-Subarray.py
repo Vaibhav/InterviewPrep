@@ -22,3 +22,11 @@ class Solution(object):
             ret = max(ret, imax)
         
         return ret
+
+s = Solution()
+
+r = s.maxProduct([2,4,-5,8,-2,-8])
+
+t = s.maxProduct([1,2,3])
+
+print(t)
