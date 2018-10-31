@@ -8,7 +8,7 @@ Output:
 ]
 '''
 
-def groupAnagrams(self, strs):
+def groupAnagrams(strs):
     """
     :type strs: List[str]
     :rtype: List[List[str]]
@@ -20,3 +20,21 @@ def groupAnagrams(self, strs):
     return list(d.values())
 
     # O(n * (k)log(k))
+
+
+def checkIfAnagram(s,t):
+  letters = {}
+  for i in s:
+    letters[i] = letters.get(i,0) + 1
+
+  for j in t:
+    letters[j] = letters.get(j,0) - 1
+
+  for v in letters.values():
+    if v != 0:
+      return False
+
+  return True
+
+print(checkIfAnagram("cat", "act"))
+

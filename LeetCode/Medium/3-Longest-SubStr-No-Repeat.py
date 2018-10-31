@@ -14,7 +14,9 @@ def lengthOfLongestSubstring(self, s):
         for i in range(length):
             # check if character is repeated within the current running word
             if s[i] in dic and start <= dic[s[i]]:
-                # if it is, set the new running word to start from the last time char was seen + 1
+                # This is like a rolling window.
+                # If you see a letter again, you exclude that letter from the start and count the second occurence.
+                # Set the new running word to start from the last time char was seen + 1
                 start = dic[s[i]] + 1
                 # print(start, i, s[i])
             else:
